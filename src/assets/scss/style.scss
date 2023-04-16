@@ -1,0 +1,401 @@
+$h1-font-size: 1.5rem;
+$h2-font-size: 1.25rem;
+$regular-font-size: 1rem;
+$button-font-size: 1rem;
+$sub-title-font-size: 0.75rem;
+$background-color: #ffffff;
+$primary-color: #333;
+
+// Fonts
+@mixin font($font-family, $font-file) {
+  @font-face {
+    font-family: $font-family;
+    src: url($font-file + ".eot");
+    src: url($font-file + ".eot?#iefix") format("embedded-opentype"),
+      url($font-file + ".ttf") format("truetype"),
+      url($font-file + ".svg#" + $font-family) format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+@include font("Space Grotesk", "../fonts/SpaceGrotesk");
+$space-grotesk: "Space Grotesk", sans-serif;
+$ibm-plex-mono: "IBM Plex Mono", monospace;
+
+@mixin sm {
+  @media only screen and (max-width: 640px) {
+    @content; // projected content will be embedded here
+  }
+}
+
+@mixin md {
+  @media only screen and (min-width: 640px) {
+    @content; // projected content will be embedded here
+  }
+}
+%highlight {
+  background-color: $primary-color;
+  color: $background-color;
+  text-align: center;
+}
+%global-text {
+  color: $primary-color;
+}
+%border-and-shadow {
+  background: $background-color;
+  border: 1px solid $primary-color;
+  box-shadow: 2px 6px 0px $primary-color;
+}
+.contact-btn {
+  @extend %highlight;
+  font: {
+    family: $space-grotesk;
+    size: $button-font-size;
+    font-weight: bold;
+  }
+  display: inline-block;
+  padding: 1rem 4rem;
+}
+.contact-btn:hover {
+  @extend %highlight;
+  @extend %border-and-shadow;
+  color: $primary-color;
+  background-color: $background-color;
+}
+.highlight-text {
+  @extend %highlight;
+  font: {
+    family: $ibm-plex-mono;
+    size: $h2-font-size;
+  }
+  // text upercase
+  text-transform: uppercase;
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+}
+.email-highlight-text {
+  @extend %highlight;
+  font: {
+    family: $space-grotesk;
+    size: $sub-title-font-size;
+  }
+  padding: 0.4rem;
+  display: inline-block;
+  // underline text
+  text-decoration: underline;
+}
+.container-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.page-title {
+  text-transform: uppercase;
+  font: {
+    family: $ibm-plex-mono;
+    size: $h1-font-size;
+  }
+}
+.body-text {
+  @extend %global-text;
+  font-size: $regular-font-size;
+  font-family: $space-grotesk;
+}
+.body {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  @include sm {
+    padding: 0.5rem 2rem;
+  }
+  @include md {
+    padding: 0rem 10%;
+  }
+}
+.title-card {
+  @include md {
+    width: 30%;
+    margin: 0 auto;
+  }
+  @extend %border-and-shadow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  padding: 2rem 1rem;
+  gap: 10px;
+}
+.title-text {
+  font-family: $space-grotesk;
+  font-size: $h2-font-size;
+  width: 100%;
+  font-weight: 400;
+  @extend %global-text;
+}
+
+// spacer with height 400px
+.spacer {
+  @include md {
+    height: 5rem;
+  }
+  height: 3rem;
+}
+.spacer-3 {
+  height: 6rem;
+}
+.menu-burger {
+  display: none;
+  @include sm {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+.about-section {
+  display: inline-block;
+  @include sm {
+    display: flex;
+    flex-direction: column;
+  }
+  // height full screen
+  height: 100vh;
+}
+
+.bottom-sticky-button {
+  position: fixed;
+  bottom: 2rem;
+  left: 47%;
+  width: 100%;
+  z-index: 2;
+}
+.social-media-row {
+  display: flex;
+  @include md {
+    display: none;
+  }
+  // space around evenly
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.menu-burger-fullscreen {
+  display: none;
+  @include sm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    z-index: 3;
+  }
+}
+.menu-burger-item {
+  @include sm {
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: $regular-font-size;
+    font-family: $ibm-plex-mono;
+    font-weight: 500;
+    // border all
+    border: 1px solid $primary-color;
+    //upercase
+    text-transform: uppercase;
+    color: $primary-color;
+    text-decoration: none;
+  }
+}
+.menu-burger-item:hover {
+  @include sm {
+    color: $background-color;
+    background-color: $primary-color;
+  }
+}
+
+.section-title {
+  @extend %global-text;
+  font-size: $h2-font-size;
+  font-family: $ibm-plex-mono;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/// Banner section
+%banner {
+  display: none;
+  @include sm {
+    display: none;
+  }
+  @include md {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    color: $background-color;
+    background-color: $primary-color;
+    z-index: 1;
+  }
+}
+
+.menu-banner-left {
+  @extend %banner;
+  left: 0;
+}
+.menu-banner-right {
+  @extend %banner;
+  right: 0;
+}
+.menu-banner-item {
+  color: $background-color;
+  font-family: $ibm-plex-mono;
+  margin-bottom: 6rem;
+}
+
+// Skills section
+.skill-grids {
+  margin-top: 4rem;
+  display: grid;
+  // Grid auto fit column on mobile and row on desktop
+  grid-template-columns: 1fr;
+  @include md {
+    grid-template-columns: 1fr 1fr;
+  }
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+.skill-item {
+  @extend %border-and-shadow;
+  padding: 1rem 1rem;
+  gap: 10px;
+}
+
+.skill-header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+// Project section
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  @include md {
+    // reverse
+    flex-direction: row-reverse;
+    justify-content: start;
+  }
+  align-items: start;
+  margin: 4rem 1rem;
+}
+.project-img {
+  width: 80vw;
+  height: 80vw;
+  @include md {
+    flex: 1;
+    height: 50vh;
+    margin-left: 1rem;
+  }
+  border: 1px solid $primary-color;
+}
+.project-table {
+  width: 80vw;
+  @include md {
+    width: 50%;
+  }
+  // inner border
+  border: 1px solid $primary-color;
+  border-right: 0;
+  border-bottom: 0;
+  border-collapse: collapse;
+}
+.project-table-row {
+  display: flex;
+}
+.project-table-cell {
+  padding: 1rem;
+  // 1 unit of flex
+  // outer border
+  border: 1px solid $primary-color;
+  flex: 1;
+  border-top: 0;
+  border-left: 0;
+  text-align: center;
+}
+.project-table-cell:hover {
+  @extend %border-and-shadow;
+}
+.project-table-cell:selection {
+  background-color: $primary-color;
+  color: $background-color;
+}
+
+// Footer section
+
+.footer-section {
+  height: 4rem;
+  display: flex;
+  @include sm {
+    display: none;
+  }
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-color;
+  color: $background-color;
+}
+// contact section
+
+.contact-container {
+  // row when desktop and column when mobile
+  display: flex;
+  flex-direction: column;
+  @include md {
+    flex-direction: row;
+  }
+  justify-content: center;
+  margin: 4rem 1rem;
+}
+.contact-message {
+  font-family: $space-grotesk;
+  flex: 1;
+  @extend %global-text;
+}
+
+.contact-send {
+  @extend %global-text;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contact-input {
+  @extend %global-text;
+  @include md {
+    width: 50%;
+  }
+  width: 100%;
+  padding: 2rem 1rem;
+  margin: 1rem 0;
+  //inner shadow
+  box-shadow: inset -2px 4px 0px $primary-color;
+  border: 1px solid $primary-color;
+  font-family: $space-grotesk;
+}
+.svg-icon {
+  fill: $background-color;
+}
+.svg-icon-stroke {
+  stroke: $background-color;
+}
+.svg-icon-dark {
+  fill: $primary-color;
+}
